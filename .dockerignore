@@ -1,0 +1,23 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+readme.md
+livenote.md
+
+# Fly.io files
+fly.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log 
