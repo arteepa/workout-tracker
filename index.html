@@ -4,60 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Workout Tracker</h1>
+            <div class="header-content">
+                <div class="header-left">
+                    <p class="debug-text">Turn off silent mode to hear beeps</p>
+                    <button id="test-beep-btn" class="btn btn-debug">Test Beep</button>
+                </div>
+                <div class="header-right">
+                    <button id="settings-btn" class="btn btn-settings">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#4a4a4a" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.5 5.32 14.87 5.07L14.5 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.5 2.42L9.13 5.07C8.5 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.22 8.95 2.27 9.22 2.46 9.37L4.57 11C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.22 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.94C7.96 18.34 8.5 18.68 9.13 18.93L9.5 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.5 21.58L14.87 18.93C15.5 18.68 16.04 18.34 16.56 17.94L19.05 18.95C19.27 19.03 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </header>
 
-        <!-- Stopwatch Section -->
+        <!-- Main Timer Section -->
         <section class="stopwatch-section">
-            <h2>Workout Timer</h2>
             <div class="stopwatch-display">
                 <div class="time-display" id="stopwatch-display">00:00:00</div>
-            </div>
-            <div class="stopwatch-controls">
-                <button id="start-btn" class="btn btn-primary">Start</button>
-                <button id="stop-btn" class="btn btn-secondary" disabled>Stop</button>
-                <button id="reset-btn" class="btn btn-reset">Reset</button>
+                <div class="timer-duration-display-main hidden" id="timer-duration-display-main">
+                    <div class="timer-duration-label">Timer</div>
+                    <div class="timer-duration-time" id="timer-duration-time-main">--:--</div>
+                </div>
             </div>
         </section>
+    </div>
 
-        <!-- Metronome Section -->
-        <section class="metronome-section">
-            <h2>Metronome</h2>
-            <div class="metronome-controls">
-                <div class="interval-control">
-                    <label for="interval-input">Interval (minutes):</label>
-                    <input type="number" id="interval-input" min="1" max="10" value="5" class="number-input">
-                </div>
-                <div class="toggle-control">
-                    <label class="toggle-label">
-                        <input type="checkbox" id="metronome-toggle">
-                        <span class="toggle-slider"></span>
-                        <span class="toggle-text">Enable Metronome</span>
-                    </label>
+    <!-- Sticky Footer with Timer Controls -->
+    <footer class="sticky-footer">
+        <!-- Timer and Metronome Controls -->
+        <div class="footer-controls">
+            <!-- Timer Subsection -->
+            <div class="timer-subsection timer-subsection clickable-subsection" id="timer-subsection">
+                <div class="timer-controls">
+                    <div class="subsection-header">
+                        <div class="subsection-icon" id="timer-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </div>
+                        <div class="subsection-title">Timer</div>
+                    </div>
+                    <div class="subsection-value" id="timer-duration-display">1 min</div>
+                    <div class="timer-display hidden">
+                        <div class="time-display" id="timer-display">--:--</div>
+                    </div>
                 </div>
             </div>
-            <div class="metronome-status" id="metronome-status">Disabled</div>
-        </section>
+            <!-- Metronome Subsection -->
+            <div class="timer-subsection metronome-subsection clickable-subsection" id="metronome-subsection">
+                <div class="metronome-controls">
+                    <div class="subsection-header">
+                        <div class="subsection-icon" id="metronome-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                        <div class="subsection-title">Metronome</div>
+                    </div>
+                    <div class="subsection-value" id="metronome-interval-display">1 min</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stopwatch-controls">
+            <!-- Initial state: only Start button -->
+            <button id="start-btn" class="btn btn-primary">Start</button>
+            
+            <!-- Active state: Discard and Finish buttons -->
+            <button id="discard-btn" class="btn btn-secondary hidden">Discard</button>
+            <button id="finish-btn" class="btn btn-reset hidden">Finish</button>
+        </div>
+        
+    </footer>
 
-        <!-- Rest Timer Section -->
-        <section class="rest-timer-section">
-            <h2>Rest Timer</h2>
-            <div class="rest-timer-controls">
-                <div class="duration-input">
-                    <label for="rest-duration">Duration (seconds):</label>
-                    <input type="number" id="rest-duration" min="10" max="600" value="60" class="number-input">
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button id="close-settings-btn" class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="settings-timer-duration">Timer Duration (minutes):</label>
+                        <input type="number" id="settings-timer-duration" min="1" max="60" value="1" class="number-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-metronome-interval">Metronome Interval (minutes):</label>
+                        <input type="number" id="settings-metronome-interval" min="1" max="10" value="1" class="number-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings-btn" class="btn btn-primary">Save</button>
+                <button id="cancel-settings-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Screen Overlay -->
+    <div id="summary-overlay" class="summary-overlay hidden">
+        <div class="summary-content">
+            <div class="summary-header">
+                <p class="summary-subtitle">Workout Summary</p>
+            </div>
+            
+            <div class="summary-stats">
+                <div class="summary-stat">
+                    <div class="stat-label">Total Time</div>
+                    <div class="stat-value" id="summary-time">00:00:00</div>
+                    <div class="stat-label">Date</div>
+                    <div class="stat-value" id="summary-date">--</div>
+                    <div class="stat-value" id="summary-timestamp">--</div>
                 </div>
-                <button id="rest-start-btn" class="btn btn-warning">Start Rest</button>
             </div>
-            <div class="rest-timer-display">
-                <div class="time-display" id="rest-display">--:--</div>
+            
+            <div class="summary-actions">
+                <button id="summary-reset-btn" class="btn btn-secondary">Discard</button>
             </div>
-        </section>
+        </div>
     </div>
 
     <script src="script.js"></script>

@@ -6,62 +6,269 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #1a1a1a;
     min-height: 100vh;
-    color: #333;
+    color: #e0e0e0;
     line-height: 1.6;
+    padding-bottom: 200px; /* Space for sticky footer with controls */
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sticky Footer */
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 20px;
+    z-index: 1000;
+}
+
+.footer-controls {
+    max-width: 600px;
+    margin: 0 auto 15px;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-controls .timer-subsection {
+    flex: 1;
+    min-width: 280px;
+    margin-top: 0;
+    padding: 10px 5px;
+    height: 80px;
+}
+
+.footer-controls .timer-subsection .time-display {
+    font-size: 1.5rem;
+    min-height: 50px;
+    padding: 10px;
+}
+
+.footer-controls .duration-display,
+.footer-controls .interval-display {
+    min-height: 50px;
+    font-size: 0.9rem;
+}
+
+.footer-controls .value-display {
+    font-size: 1rem;
+    padding: 6px 12px;
+    min-width: 50px;
+}
+
+.footer-controls .btn {
+    min-height: 40px;
+    font-size: 1rem;
+    padding: 10px 15px;
+}
+
+.sticky-footer .stopwatch-controls {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.sticky-footer .audio-controls {
+    max-width: 600px;
+    margin: 10px auto 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sticky-footer .audio-controls .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    min-height: 35px;
 }
 
 /* Header */
 header {
-    text-align: center;
-    margin-bottom: 30px;
+    margin: 20px auto;
+    flex-shrink: 0;
+    min-height: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.header-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+header p {
+    color: #6a6a6a;
+    margin: 0;
 }
 
 header h1 {
-    color: white;
+    color: #ffffff;
     font-size: 2.5rem;
     font-weight: 700;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* Section Styles */
 section {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
+    padding: 0px 25px;
     margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
+}
+
+/* Stopwatch Section - Fill available space */
+.stopwatch-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px 25px 120px 25px; /* Extra bottom padding for sticky footer */
+    min-height: 0; /* Allow flex item to shrink */
 }
 
 section h2 {
-    color: #333;
+    color: #ffffff;
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
     font-weight: 600;
 }
 
+/* Timer Subsection Styles */
+.timer-subsection {
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+}
+
+/* Clickable Subsection Styles */
+.clickable-subsection {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.clickable-subsection:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Subsection Header */
+.subsection-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.subsection-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6a6a6a;
+    transition: all 0.2s ease;
+    margin: 0;
+    padding: 0;
+}
+
+.subsection-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.subsection-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #cacaca;
+    letter-spacing: 0.5px;
+}
+
+/* Subsection Value */
+.subsection-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+/* Timer duration display - right aligned */
+#timer-duration-display {
+    text-align: right;
+}
+
+/* Metronome interval display - right aligned */
+#metronome-interval-display {
+    text-align: right;
+}
+
+
+
+.timer-subsection h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.timer-subsection .time-display {
+    font-size: 2rem;
+    padding: 15px;
+    min-height: 60px;
+}
+
 /* Time Display */
 .time-display {
-    font-family: 'Courier New', monospace;
-    font-size: 3rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 4rem;
     font-weight: bold;
     text-align: center;
-    color: #333;
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #e9ecef;
+    color: #6a6a6a;
+    padding: 0 20px;
     margin: 20px 0;
     min-height: 80px;
     display: flex;
@@ -69,18 +276,79 @@ section h2 {
     justify-content: center;
 }
 
+/* Timer Duration Display Main */
+.timer-duration-display-main {
+    text-align: center;
+    margin-top: 10px;
+    padding: 15px 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timer-duration-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffcc00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.timer-duration-time {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
 /* Button Styles */
 .btn {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    height: 80px;
     padding: 15px 25px;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    border-radius: 20px;
+    font-size: 1.6rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     min-height: 50px;
     min-width: 80px;
     touch-action: manipulation;
+    flex: 1;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* iOS touch state fixes */
+.btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+/* Reset transform on touch end */
+.btn:not(:active) {
+    transform: none;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .btn:disabled {
@@ -89,43 +357,93 @@ section h2 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
+    background-color: #ffcc00;
+    color: #1a1a2e;
 }
 
-.btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+.btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #f44336, #d32f2f);
-    color: white;
+    color: #ffcc00;
+    border: 2px solid #ffcc00;
+    background-color: transparent;
 }
 
-.btn-secondary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+.btn-secondary:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-secondary:disabled {
+    color: #6a6a6a;
+    border: 2px solid #2a2a2a;
+    background-color: #2a2a2a;
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 .btn-reset {
-    background: linear-gradient(135deg, #ff9800, #f57c00);
-    color: white;
+    background: #FF4E4E;
+    color: #fff;
 }
 
-.btn-reset:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+.btn-reset:active:not(:disabled) {
+    transform: scale(0.98);
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, #ff5722, #e64a19);
-    color: white;
+    background: linear-gradient(135deg, #ff9ff3, #feca57);
+    color: #1a1a2e;
 }
 
-.btn-warning:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+.btn-warning:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-settings {
+    background-color: transparent;
+    color: #8A8A8A;
+    font-size: 0.85rem;
+    padding: 0;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    flex: none;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-settings:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-debug {
+    background-color: transparent;
+    color: #8A8A8A;
+    border: 1px solid #8A8A8A;
+    font-size: 0.85rem;
+    border-radius: 14px;
+    padding: 10px 20px;
+    min-height: 35px;
+    height: auto;
+    min-width: auto;
+    flex: none;
+    white-space: nowrap;
+    width: auto;
+}
+
+.btn-debug:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.debug-text {
+    line-height: 1.2;
+    font-size: 0.9rem;
+    color: #8A8A8A;
+    text-align: center;
 }
 
 /* Stopwatch Controls */
@@ -140,17 +458,18 @@ section h2 {
 .number-input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #e9ecef;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    font-size: 1rem;
-    background: #f8f9fa;
+    font-size: 1.6rem;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
     transition: border-color 0.3s ease;
 }
 
 .number-input:focus {
     outline: none;
-    border-color: #667eea;
-    background: white;
+    border-color: #00ff88;
+    background: rgba(30, 30, 45, 0.9);
 }
 
 /* Label Styles */
@@ -158,96 +477,183 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #555;
+    color: #ffffff;
+}
+
+.duration-display label,
+.interval-display label {
+    display: inline-block;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+/* Value Display Styles */
+.value-display {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #00ff88;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.duration-display,
+.interval-display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    min-height: 80px;
+    justify-content: center;
 }
 
 /* Metronome Controls */
 .metronome-controls {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle-control {
+    display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.interval-control {
+
+
+
+
+/* Timer Controls */
+.timer-controls {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* Toggle Switch */
-.toggle-label {
+.timer-display {
+    min-height: 80px;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    user-select: none;
+    justify-content: center;
 }
 
-.toggle-label input[type="checkbox"] {
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.hidden {
     display: none;
 }
 
-.toggle-slider {
-    position: relative;
-    width: 60px;
-    height: 30px;
-    background: #ccc;
-    border-radius: 30px;
-    transition: background 0.3s ease;
-    margin-right: 15px;
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 25px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    animation: modalSlideIn 0.3s ease-out;
 }
 
-.toggle-slider:before {
-    content: '';
-    position: absolute;
-    width: 26px;
-    height: 26px;
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: #8A8A8A;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    background: white;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.toggle-label input[type="checkbox"]:checked + .toggle-slider {
-    background: #4CAF50;
+.modal-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
-.toggle-label input[type="checkbox"]:checked + .toggle-slider:before {
-    transform: translateX(30px);
+.modal-body {
+    padding: 30px;
 }
 
-.toggle-text {
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
     font-weight: 600;
-    color: #333;
+    color: #ffffff;
+    font-size: 1.1rem;
 }
 
-/* Metronome Status */
-.metronome-status {
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 600;
-    margin-top: 15px;
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
+.form-group .number-input {
+    font-size: 1.2rem;
+    padding: 15px;
 }
 
-.metronome-status.active {
-    background: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-}
-
-/* Rest Timer Controls */
-.rest-timer-controls {
+.modal-footer {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 15px;
+    padding: 20px 30px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.duration-input {
-    display: flex;
-    flex-direction: column;
+.modal-footer .btn {
+    flex: 1;
+    min-height: 50px;
+    font-size: 1.1rem;
 }
 
 /* Responsive Design */
@@ -261,6 +667,15 @@ label {
         min-height: 100px;
     }
     
+    .timer-duration-time {
+        font-size: 4rem;
+    }
+    
+    .timer-subsection .time-display {
+        font-size: 2.5rem;
+        min-height: 70px;
+    }
+    
     .btn {
         padding: 18px 30px;
         font-size: 1.2rem;
@@ -271,15 +686,199 @@ label {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        gap: 30px;
     }
     
-    .rest-timer-controls {
+    .timer-controls {
         flex-direction: row;
         align-items: end;
     }
     
-    .duration-input {
+    .duration-display,
+    .interval-display {
         flex: 1;
+    }
+    
+    .timer-display {
+        flex: 1;
+    }
+    
+    .sticky-footer {
+        padding: 20px 40px;
+    }
+    
+    .sticky-footer .stopwatch-controls {
+        max-width: 600px;
+    }
+    
+    .header-right {
+        /* Hugs content */
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-subsection {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .timer-subsection h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .timer-subsection .time-display {
+        font-size: 1.8rem;
+        padding: 12px;
+        min-height: 50px;
+    }
+    
+    .timer-duration-display-main {
+        padding: 12px 15px;
+        margin-top: 8px;
+    }
+    
+    .timer-duration-label {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+    }
+    
+    .timer-duration-time {
+        font-size: 3rem;
+    }
+    
+    .metronome-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .metronome-status {
+        min-width: auto;
+    }
+    
+    .clickable-subsection {
+        height: 80px;
+        padding: 15px;
+    }
+    
+    .subsection-header {
+        gap: 4px;
+    }
+    
+    .subsection-icon {
+        width: 36px;
+        height: 36px;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .subsection-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+    
+    
+    .subsection-value {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    #timer-duration-display {
+        text-align: right;
+    }
+    
+    #metronome-interval-display {
+        text-align: right;
+    }
+    
+
+    
+    .timer-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .duration-display,
+    .interval-display,
+    .timer-display {
+        min-height: 60px;
+    }
+    
+    .sticky-footer {
+        padding: 10px 15px;
+    }
+    
+    .footer-controls {
+        flex-direction: row;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .footer-controls .timer-subsection {
+        min-width: 140px;
+        flex: 1;
+        height: 80px;
+    }
+    
+    .footer-controls .timer-subsection .time-display {
+        font-size: 1.3rem;
+        min-height: 40px;
+    }
+    
+    .footer-controls .duration-display,
+    .footer-controls .interval-display {
+        min-height: 40px;
+        font-size: 0.8rem;
+    }
+    
+    .footer-controls .value-display {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+        min-width: 40px;
+    }
+    
+    .footer-controls .btn {
+        min-height: 35px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+    
+    .sticky-footer .stopwatch-controls {
+        gap: 10px;
+    }
+    
+    .sticky-footer .audio-controls {
+        gap: 8px;
+    }
+    
+    .sticky-footer .btn {
+        min-height: 45px;
+    }
+    
+    .sticky-footer .audio-controls .btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        min-height: 35px;
+    }
+    
+    .modal-content {
+        margin: 10px;
+    }
+    
+    .modal-header {
+        padding: 20px 20px 15px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        padding: 15px 20px 25px;
+    }
+    
+    .header-right {
+        /* Hugs content */
     }
 }
 
@@ -291,16 +890,27 @@ label {
 }
 
 .time-display.active {
-    animation: pulse 2s infinite;
-    border-color: #4CAF50;
-    background: #e8f5e8;
+    color:#ffcc00;
+    text-shadow: 0 0 6px rgba(255, 230, 0, 0.5);
 }
 
 /* Focus styles for accessibility */
-.btn:focus,
 .number-input:focus {
-    outline: 2px solid #667eea;
+    outline: 2px solid #ffcc00;
     outline-offset: 2px;
+}
+
+/* iOS touch improvements */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
 }
 
 /* High contrast mode support */
@@ -310,6 +920,117 @@ label {
     }
     
     .time-display {
-        border: 3px solid #333;
+        border: 3px solid #00ff88;
+    }
+}
+
+/* Summary Screen Styles */
+.summary-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.summary-overlay.hidden {
+    display: none;
+}
+
+.summary-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+.summary-header h2 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.summary-subtitle {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.summary-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.summary-stat {
+    background: rgba(30, 30, 45, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    color: #00ff88;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.summary-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.summary-actions .btn {
+    min-width: 120px;
+}
+
+/* Responsive design for summary screen */
+@media (max-width: 480px) {
+    .summary-content {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .summary-header h2 {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .summary-actions {
+        flex-direction: column;
+    }
+    
+    .summary-actions .btn {
+        width: 100%;
     }
 } 

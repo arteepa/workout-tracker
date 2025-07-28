@@ -1,6 +1,16 @@
 ### workout tracker
 
-## v1 - stopwatch
+## to do
+• improve the ui
+• timer stops when i switch to other apps
+• change "rest" concept to "custom timer", can also be used for planks, for ex
+• improve workout summary visually
+• export workout summary to image
+• explore doing a iphone app
+• explainers of the tools
+
+
+## specs
 
 # General
 • 100% mobile focused, but usable on desktop
