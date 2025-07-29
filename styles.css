@@ -892,6 +892,26 @@ label {
     100% { transform: scale(1); }
 }
 
+/* Synchronized pulse animation for clock sync */
+@keyframes syncPulse {
+    0% { 
+        transform: scale(1);
+        text-shadow: 0 0 6px rgba(255, 230, 0, 0.5);
+    }
+    50% { 
+        transform: scale(1.02);
+        text-shadow: 0 0 12px rgba(255, 230, 0, 0.8);
+    }
+    100% { 
+        transform: scale(1);
+        text-shadow: 0 0 6px rgba(255, 230, 0, 0.5);
+    }
+}
+
+.sync-pulse {
+    animation: syncPulse 0.3s ease-in-out;
+}
+
 .time-display.active {
     color:#ffcc00;
     text-shadow: 0 0 6px rgba(255, 230, 0, 0.5);

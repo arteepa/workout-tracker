@@ -16,6 +16,7 @@ class WorkoutTracker {
         this.timerInterval = null;
         this.timerDuration = 1;
         this.timerRemaining = 0;
+        this.timerStartTime = 0; // Track when timer started for sync
         this.metronomeWasEnabled = false;
         
         this.init();
@@ -159,6 +160,24 @@ class WorkoutTracker {
         });
     }
 
+    // Synchronized visual pulse animation
+    triggerSyncPulse() {
+        const displays = [
+            document.getElementById('stopwatch-display'),
+            document.getElementById('timer-display'),
+            document.getElementById('timer-duration-time-main')
+        ];
+        
+        displays.forEach(display => {
+            if (display) {
+                display.classList.add('sync-pulse');
+                setTimeout(() => {
+                    display.classList.remove('sync-pulse');
+                }, 300);
+            }
+        });
+    }
+
     // Stopwatch functionality
     startStopwatch() {
         if (!this.stopwatchRunning) {
@@ -167,6 +186,7 @@ class WorkoutTracker {
             
             // Play metronome beep when starting
             this.playMetronomeBeep();
+            this.triggerSyncPulse();
             
             // Show active state buttons
             document.getElementById('start-btn').classList.add('hidden');
@@ -191,6 +211,7 @@ class WorkoutTracker {
         
         // Reset to initial state
         this.stopwatchTime = 0;
+        this.timerStartTime = 0;
         this.updateStopwatchDisplay();
         
         // Show initial state buttons
@@ -228,6 +249,7 @@ class WorkoutTracker {
     resetFromSummary() {
         this.hideSummary();
         this.stopwatchTime = 0;
+        this.timerStartTime = 0;
         this.updateStopwatchDisplay();
         
         // Show initial state buttons
@@ -278,6 +300,7 @@ class WorkoutTracker {
         if (this.stopwatchRunning) {
             this.stopwatchTime += 1000; // 1 second
             this.updateStopwatchDisplay();
+            this.updateTimer(); // Update timer logic
             this.checkMetronome();
         }
     }
@@ -293,11 +316,7 @@ class WorkoutTracker {
 
     // Metronome functionality
     toggleMetronome() {
-        // Don't allow metronome when timer is running
-        if (this.timerRunning) {
-            return;
-        }
-        
+        // Allow metronome to work alongside timer
         this.metronomeEnabled = !this.metronomeEnabled;
         
         if (this.metronomeEnabled) {
@@ -310,10 +329,11 @@ class WorkoutTracker {
     }
 
     startMetronome() {
-        if (!this.metronomeRunning && this.metronomeEnabled && !this.timerRunning) {
+        if (!this.metronomeRunning && this.metronomeEnabled) {
             this.metronomeRunning = true;
             this.metronomeLastBeep = this.stopwatchTime;
             this.playMetronomeBeep();
+            this.triggerSyncPulse();
         }
     }
 
@@ -326,12 +346,13 @@ class WorkoutTracker {
     }
 
     checkMetronome() {
-        if (this.metronomeRunning && this.metronomeEnabled && !this.timerRunning) {
+        if (this.metronomeRunning && this.metronomeEnabled) {
             const intervalMs = this.metronomeIntervalMinutes * 60000;
             const timeSinceLastBeep = this.stopwatchTime - this.metronomeLastBeep;
             
             if (timeSinceLastBeep >= intervalMs) {
                 this.playMetronomeBeep();
+                this.triggerSyncPulse();
                 this.metronomeLastBeep = this.stopwatchTime;
             }
         }
@@ -340,12 +361,9 @@ class WorkoutTracker {
     updateMetronomeStatus() {
         const iconElement = document.getElementById('metronome-icon');
         
-        if (this.metronomeEnabled && !this.timerRunning) {
+        if (this.metronomeEnabled) {
             iconElement.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
             iconElement.style.color = '#ffcc00';
-        } else if (this.timerRunning) {
-            iconElement.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>';
-            iconElement.style.color = '#6a6a6a';
         } else {
             iconElement.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>';
             iconElement.style.color = '#6a6a6a';
@@ -364,7 +382,7 @@ class WorkoutTracker {
         }
     }
 
-    // Timer functionality
+    // Timer functionality with synchronized timing
     toggleTimer() {
         if (this.timerRunning) {
             this.endTimer();
@@ -375,20 +393,15 @@ class WorkoutTracker {
 
     startTimer() {
         if (!this.timerRunning) {
-            // Store metronome state
-            this.metronomeWasEnabled = this.metronomeEnabled;
-            
-            // Stop metronome
-            this.stopMetronome();
-            this.metronomeEnabled = false;
-            
-            // Start timer
+            // Start timer with synchronized timing
             this.timerRunning = true;
+            this.timerStartTime = this.stopwatchTime; // Sync to current stopwatch time
             this.timerRemaining = this.timerDuration * 60000; // Convert minutes to milliseconds
             this.updateTimerDisplay();
             
             // Play timer start beep
             this.playMetronomeBeep();
+            this.triggerSyncPulse();
             
             // Show timer display (keep duration display visible)
             document.querySelector('.timer-display').classList.remove('hidden');
@@ -399,29 +412,33 @@ class WorkoutTracker {
             // Update timer status
             document.getElementById('timer-display').classList.add('active');
             this.updateTimerStatus();
-            
-            this.timerInterval = setInterval(() => this.updateTimer(), 1000);
         }
     }
 
     updateTimer() {
-        this.timerRemaining -= 1000;
-        this.updateTimerDisplay();
-        
-        if (this.timerRemaining <= 0) {
-            this.completeTimer();
+        // Timer now updates based on stopwatch time for perfect sync
+        if (this.timerRunning) {
+            const elapsedSinceStart = this.stopwatchTime - this.timerStartTime;
+            this.timerRemaining = Math.max(0, (this.timerDuration * 60000) - elapsedSinceStart);
+            this.updateTimerDisplay();
+            
+            if (this.timerRemaining <= 0) {
+                this.completeTimer();
+            }
         }
     }
 
     updateTimerDisplay() {
-        const minutes = Math.floor(this.timerRemaining / 60000);
-        const seconds = Math.floor((this.timerRemaining % 60000) / 1000);
-        const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        document.getElementById('timer-display').textContent = display;
-        
-        // Update main timer duration display
         if (this.timerRunning) {
+            const minutes = Math.floor(this.timerRemaining / 60000);
+            const seconds = Math.floor((this.timerRemaining % 60000) / 1000);
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timer-display').textContent = display;
+            
+            // Update main timer duration display
             document.getElementById('timer-duration-time-main').textContent = display;
+        } else {
+            document.getElementById('timer-display').textContent = '--:--';
         }
     }
 
@@ -433,19 +450,10 @@ class WorkoutTracker {
 
     completeTimer() {
         this.timerRunning = false;
-        clearInterval(this.timerInterval);
         
         // Play completion sound
         this.playTimerCompletionBeep();
-        
-        // Restore metronome if it was enabled
-        if (this.metronomeWasEnabled) {
-            setTimeout(() => {
-                this.metronomeEnabled = true;
-                this.startMetronome();
-                this.updateMetronomeStatus();
-            }, 1000);
-        }
+        this.triggerSyncPulse();
         
         // Hide timer display (duration display stays visible)
         document.querySelector('.timer-display').classList.add('hidden');
@@ -584,8 +592,6 @@ class WorkoutTracker {
             throw error;
         }
     }
-
-
 
     updateDisplays() {
         this.updateStopwatchDisplay();
