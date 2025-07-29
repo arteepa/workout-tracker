@@ -264,7 +264,7 @@ section h2 {
 
 /* Time Display */
 .time-display {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Space Mono', 'Courier New', monospace;
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
@@ -305,7 +305,7 @@ section h2 {
 }
 
 .timer-duration-time {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Space Mono', 'Courier New', monospace;
     font-size: 4rem;
     font-weight: bold;
     color: #ffffff;
@@ -1019,7 +1019,7 @@ label {
     color: #00ff88;
     font-size: 2rem;
     font-weight: bold;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Space Mono', 'Courier New', monospace;
     text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
 
