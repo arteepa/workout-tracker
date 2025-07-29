@@ -209,6 +209,11 @@ class WorkoutTracker {
             }
         }
         
+        // Deactivate timebox if running
+        if (this.timerRunning) {
+            this.completeTimer();
+        }
+        
         // Reset to initial state
         this.stopwatchTime = 0;
         this.timerStartTime = 0;
