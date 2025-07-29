@@ -161,6 +161,20 @@ section {
     padding-top: 25vh; /* Fixed elastic value padding from top to approximate center */
 }
 
+/* Mobile Safari viewport height fix */
+@supports (-webkit-touch-callout: none) {
+    .stopwatch-section {
+        padding-top: 20vh; /* Reduced padding for mobile Safari */
+    }
+}
+
+/* Additional mobile Safari specific adjustments */
+@media screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .stopwatch-section {
+        padding-top: 15vh; /* Further reduced for smaller mobile screens */
+    }
+}
+
 section h2 {
     color: #ffffff;
     font-size: 1.5rem;
