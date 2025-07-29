@@ -5,6 +5,8 @@
 • timer stops when i switch to other apps
 • change "rest" concept to "custom timer", can also be used for planks, for ex
 • improve workout summary visually
+• sync all clocks, for visual
+• clocks monospaced?
 • export workout summary to image
 • explore doing a iphone app
 • explainers of the tools

@@ -32,8 +32,8 @@
             <div class="stopwatch-display">
                 <div class="time-display" id="stopwatch-display">00:00:00</div>
                 <div class="timer-duration-display-main hidden" id="timer-duration-display-main">
-                    <div class="timer-duration-label">Timer</div>
                     <div class="timer-duration-time" id="timer-duration-time-main">--:--</div>
+                    <div class="timer-duration-label">Timebox</div>
                 </div>
             </div>
         </section>
@@ -52,7 +52,7 @@
                                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                             </svg>
                         </div>
-                        <div class="subsection-title">Timer</div>
+                        <div class="subsection-title">Timebox</div>
                     </div>
                     <div class="subsection-value" id="timer-duration-display">1 min</div>
                     <div class="timer-display hidden">
@@ -78,7 +78,7 @@
         
         <div class="stopwatch-controls">
             <!-- Initial state: only Start button -->
-            <button id="start-btn" class="btn btn-primary">Start</button>
+            <button id="start-btn" class="btn btn-primary">Start Session</button>
             
             <!-- Active state: Discard and Finish buttons -->
             <button id="discard-btn" class="btn btn-secondary hidden">Discard</button>
@@ -97,7 +97,7 @@
             <div class="modal-body">
                 <form id="settings-form">
                     <div class="form-group">
-                        <label for="settings-timer-duration">Timer Duration (minutes):</label>
+                        <label for="settings-timer-duration">Timebox Duration (mins):</label>
                         <input type="number" id="settings-timer-duration" min="1" max="60" value="1" class="number-input">
                     </div>
                     <div class="form-group">

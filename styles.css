@@ -153,11 +153,12 @@ section {
 .stopwatch-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex: 1;
     padding: 20px 25px 120px 25px; /* Extra bottom padding for sticky footer */
     min-height: 0; /* Allow flex item to shrink */
+    padding-top: 25vh; /* Fixed elastic value padding from top to approximate center */
 }
 
 section h2 {
@@ -308,7 +309,8 @@ section h2 {
     font-size: 4rem;
     font-weight: bold;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.32);
+    line-height: 1;
 }
 
 /* Button Styles */
@@ -359,6 +361,7 @@ section h2 {
 .btn-primary {
     background-color: #ffcc00;
     color: #1a1a2e;
+    font-weight: 700;
 }
 
 .btn-primary:active:not(:disabled) {

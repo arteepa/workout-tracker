@@ -594,6 +594,13 @@ class WorkoutTracker {
         this.updateTimerStatus();
         this.updateValueDisplays();
     }
+
+    updateTimerButtonState() {
+        // This function updates the timer button state based on current conditions
+        // Currently just calls the existing update functions
+        this.updateMetronomeStatus();
+        this.updateTimerStatus();
+    }
 }
 
 // Initialize the app when DOM is loaded
