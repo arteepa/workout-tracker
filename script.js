@@ -474,39 +474,24 @@ class WorkoutTracker {
 
     // Audio functionality
     async playMetronomeBeep() {
-        await this.playBeep(800, 0.3, 'sine');
+        await this.playBeep(741, 0.3, 'sine');
     }
 
     async playTimerCompletionBeep() {
         // Play triple beep using metronome sound
-        await this.playBeep(800, 0.3, 'sine');
-        setTimeout(() => this.playBeep(800, 0.3, 'sine'), 200);
-        setTimeout(() => this.playBeep(800, 0.3, 'sine'), 400);
+        await this.playBeep(528, 0.3, 'sine');
+        setTimeout(() => this.playBeep(528, 0.3, 'sine'), 200);
+        setTimeout(() => this.playBeep(528, 0.3, 'sine'), 400);
     }
 
     async testBeep() {
         console.log('Testing beep...');
         console.log('Audio context state:', this.audioContext?.state);
         console.log('User agent:', navigator.userAgent);
-        await this.playBeep(800, 0.5, 'sine');
-    }
-
-    async testTimerEndBeep() {
-        console.log('Testing timer end beep...');
-        console.log('Audio context state:', this.audioContext?.state);
-        await this.playTimerCompletionBeep();
-    }
-
-    debugAudioContext() {
-        if (this.audioContext) {
-            console.log('Audio Context Debug Info:');
-            console.log('- State:', this.audioContext.state);
-            console.log('- Sample Rate:', this.audioContext.sampleRate);
-            console.log('- Current Time:', this.audioContext.currentTime);
-            console.log('- Destination Max Channel Count:', this.audioContext.destination.maxChannelCount);
-        } else {
-            console.log('No audio context available');
-        }
+        // await this.playBeep(741, 0.5, 'sine');
+        await this.playBeep(528, 0.3, 'sine');
+        setTimeout(() => this.playBeep(528, 0.3, 'sine'), 200);
+        setTimeout(() => this.playBeep(528, 0.3, 'sine'), 400);
     }
 
     async playBeep(frequency, duration, type = 'sine') {
